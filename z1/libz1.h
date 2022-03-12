@@ -7,19 +7,17 @@
 #include <string.h>
 
 
-struct ArrayOfBlocks{
+struct BlockArray{
     int index;
-    struct Block *arrayOfBlocks;
+    struct Block *Block;
 };
 
 struct Block{
-    char *wcl; // result of count lines
-    char *wcw; // result of count words
-    char *wcc; // result of count characters
+    char *data; // result of wc command
 };
 
-struct ArrayOfBlocks createArrayOfBlocks(int size);
-int addBlock(struct ArrayOfBlocks arrayOfBlocks, struct Block newBlock);
-
-
-
+struct BlockArray createBlockArray(int size);
+int addBlock(struct BlockArray blockArray, struct Block newBlock);
+char* issueWcCommand(int filesCount,char** fileNames);
+int saveFileToBlockArray(char* filename, struct BlockArray blockArray);
+void removeBlock(struct BlockArray blockArray, int index);

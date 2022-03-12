@@ -1,11 +1,21 @@
-static:
-	make clear
-	gcc -Wall -c libz1.c #compile only to .o file
-	ar crs libz1.a libz1.o
-	gcc -Wall main.c -o main -L. -lz1
-	# cleaning up the .o files...
-	rm -f *.o
+CC = gcc -Wall
 
-clear:
-	# cleaning up files...
-	rm -f *.o *.a *.so main
+static:
+	make clean
+	$(CC) -c libz1.c
+	ar crs libz1.a libz1.o
+	$(CC) main.c -o main -L. -lz1
+	rm -f *.o *.a
+
+shared:
+	make clean
+	$(CC) -fPIC -c libz1.c
+	$(CC) -shared -fPIC -o libz1.so libz1.o
+	$(CC) main.c -o main -L. --lz1 -Wl,-rpath=`pwd`
+
+clean:
+	rm -f *.o *.a *.so *.exe main
+
+run:
+	make static
+	./main.exe test1.txt test2.txt
