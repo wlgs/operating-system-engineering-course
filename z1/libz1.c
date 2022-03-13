@@ -74,4 +74,5 @@ int saveFileToBlockArray(char* filename, struct BlockArray blockArray){
 
 void removeBlock(struct BlockArray blockArray, int index){
     free(blockArray.Block[index].data);
+    free(blockArray.Block);
 }
