@@ -5,7 +5,6 @@ static:
 	$(CC) -c libz1.c
 	ar crs libz1.a libz1.o
 	$(CC) main.c -o main -L. -lz1
-	rm -f *.o *.a
 
 shared:
 	make clean

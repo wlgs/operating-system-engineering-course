@@ -18,6 +18,6 @@ struct Block{
 
 struct BlockArray createBlockArray(int size);
 int addBlock(struct BlockArray blockArray, struct Block newBlock);
-char* issueWcCommand(int filesCount,char** fileNames);
+char* wc_file(char* fileName);
 int saveFileToBlockArray(char* filename, struct BlockArray blockArray);
 void removeBlock(struct BlockArray blockArray, int index);

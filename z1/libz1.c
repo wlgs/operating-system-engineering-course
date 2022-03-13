@@ -10,28 +10,20 @@ struct BlockArray createBlockArray(int size){
 
 // adds new block to the array of blocks, nextly increments index, then returns the index of inserted block 
 int addBlock(struct BlockArray blockArray, struct Block newBlock){
-    int nextIndex = blockArray.index + 1;
-    blockArray.index = nextIndex;
-    blockArray.Block[nextIndex] = newBlock;
-    return nextIndex;
+    blockArray.index++;
+    blockArray.Block[blockArray.index] = newBlock;
+    return blockArray.index;
 };
 
-char* issueWcCommand(int filesCount, char** fileNames){
+char* wc_file(char* fileName){
     char* command = calloc(255, sizeof(char));
     strcpy(command, "wc ");
-    for (int i = 0; i<filesCount; i++){
-        strcat(command, fileNames[i]);
-        strcat(command, " ");
-    }
-    char* filename = ".tmpfile";
-    strcat(command, "> ");
-    strcat(command, filename);
-    
-
-    printf("command is: %s\n", command);
+    strcat(command, fileName);
+    char* output = ".tmpfile";
+    strcat(command, " > ");
+    strcat(command, output);
     system(command);
-
-    return filename;
+    return output;
 }
 
 int saveFileToBlockArray(char* filename, struct BlockArray blockArray){
@@ -59,6 +51,7 @@ int saveFileToBlockArray(char* filename, struct BlockArray blockArray){
         }
     }
     fclose(file);
+    free(file);
     data[i] = '\0';
 
     struct Block newBlock;
@@ -69,10 +62,15 @@ int saveFileToBlockArray(char* filename, struct BlockArray blockArray){
     strcpy(command, "rm -f ");
     strcat(command, filename);
     system(command);
-    return addBlock(blockArray, newBlock);
+    free(command);
+
+    int index = addBlock(blockArray, newBlock);
+    return index;
 }
 
 void removeBlock(struct BlockArray blockArray, int index){
+    printf("OLD:%s\n", blockArray.Block[index].data);
+    blockArray.Block[index].data[0]='\0'; //reset the char
     free(blockArray.Block[index].data);
-    free(blockArray.Block);
+    printf("NEW:%s\n", blockArray.Block[index].data);
 }
