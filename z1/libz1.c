@@ -1,6 +1,5 @@
 #include "libz1.h"
 
-// creates a new array of blocks with given size, the index is -1 so that when we add new block it goes to 0
 struct BlockArray createBlockArray(int size)
 {
     struct BlockArray array;
@@ -73,7 +72,9 @@ int saveFileToBlockArray(char *filename, struct BlockArray blockArray)
         }
     }
     fclose(file);
-    data[--i] = '\0';
+    i--;
+    i--;
+    data[i] = '\0';
     // printf("%s\n",data);
     struct Block newBlock;
     newBlock.data = (char *)calloc(strlen(data), sizeof(char));

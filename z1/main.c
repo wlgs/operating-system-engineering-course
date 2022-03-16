@@ -48,7 +48,7 @@ void print_times(const char* operation){
 int main(int argc, char **argv)
 {
     #ifdef DYNAMIC
-    void *handle = dlopen("libz1.so", RTLD_LAZY);
+    void *handle = dlopen("./libz1.so", RTLD_LAZY);
     if (handle == NULL){
         printf("Error loading the library.");
         return -1;
@@ -138,6 +138,7 @@ int main(int argc, char **argv)
             return -1;
         }
     }
+    fclose(timerFile);
     #ifdef DYNAMIC
 	dlclose(handle);
 	#endif

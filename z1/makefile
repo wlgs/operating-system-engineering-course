@@ -22,7 +22,27 @@ dynamic:
 clean:
 	rm -f *.o *.a *.so *.exe main
 
-runtests:
+runtest:
+	echo "./main create_table 1000000 wc_files small.txt medium.txt large.txt remove_block 0 wc_files large.txt large.txt large.txt large.txt" >> report.txt
 	./main create_table 1000000 wc_files small.txt medium.txt large.txt remove_block 0 wc_files large.txt large.txt large.txt large.txt
+	echo "./main create_table 99999999 wc_files large.txt wc_files large.txt wc_files large.txt remove_block 1 remove_block 0 wc_files large.txt" >> report.txt
 	./main create_table 99999999 wc_files large.txt wc_files large.txt wc_files large.txt remove_block 1 remove_block 0 wc_files large.txt
+	echo "./main create_table 10 wc_files large.txt remove_block 0 wc_files large.txt remove_block 0 wc_files large.txt remove_block 0" >> report.txt
 	./main create_table 10 wc_files large.txt remove_block 0 wc_files large.txt remove_block 0 wc_files large.txt remove_block 0
+
+runtests-all:
+	make clean
+	make static
+	echo "======= S T A T I C =======" >> report.txt
+	make runtest
+	make clean
+	make shared
+	echo "======= S H A R E D =======" >> report.txt
+	make runtest
+	make clean
+	make dynamic
+	echo "======= D Y N A M I C =======" >> report.txt
+	make runtest
+	rm -f *.so
+	#TEST ENDED SEE RESULT IN report.txt
+

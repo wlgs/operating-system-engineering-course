@@ -1,0 +1,93 @@
+======= S T A T I C =======
+./main create_table 1000000 wc_files small.txt medium.txt large.txt remove_block 0 wc_files large.txt large.txt large.txt large.txt
+        create_table real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.010s, user 0.000s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.020s, user 0.020s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+./main create_table 99999999 wc_files large.txt wc_files large.txt wc_files large.txt remove_block 1 remove_block 0 wc_files large.txt
+        create_table real 0.530s, user 0.000s, sys 0.000s
+            wc_files real 0.010s, user 0.000s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.000s, user 0.010s, sys 0.000s
+        add_to_block real 0.010s, user 0.000s, sys 0.000s
+            wc_files real 0.000s, user 0.000s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.010s, user 0.010s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+./main create_table 10 wc_files large.txt remove_block 0 wc_files large.txt remove_block 0 wc_files large.txt remove_block 0
+        create_table real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.000s, user 0.000s, sys 0.000s
+        add_to_block real 0.010s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.000s, user 0.010s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.010s, user 0.000s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+======= S H A R E D =======
+./main create_table 1000000 wc_files small.txt medium.txt large.txt remove_block 0 wc_files large.txt large.txt large.txt large.txt
+        create_table real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.010s, user 0.000s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.020s, user 0.020s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+./main create_table 99999999 wc_files large.txt wc_files large.txt wc_files large.txt remove_block 1 remove_block 0 wc_files large.txt
+        create_table real 0.530s, user 0.000s, sys 0.000s
+            wc_files real 0.000s, user 0.000s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.010s, user 0.000s, sys 0.000s
+        add_to_block real 0.000s, user 0.010s, sys 0.000s
+            wc_files real 0.010s, user 0.000s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.000s, user 0.010s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+./main create_table 10 wc_files large.txt remove_block 0 wc_files large.txt remove_block 0 wc_files large.txt remove_block 0
+        create_table real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.000s, user 0.000s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.000s, user 0.010s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.010s, user 0.000s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+======= D Y N A M I C =======
+./main create_table 1000000 wc_files small.txt medium.txt large.txt remove_block 0 wc_files large.txt large.txt large.txt large.txt
+        create_table real 0.010s, user 0.000s, sys 0.000s
+            wc_files real 0.000s, user 0.000s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.020s, user 0.010s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+./main create_table 99999999 wc_files large.txt wc_files large.txt wc_files large.txt remove_block 1 remove_block 0 wc_files large.txt
+        create_table real 0.540s, user 0.000s, sys 0.000s
+            wc_files real 0.000s, user 0.000s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.010s, user 0.010s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.010s, user 0.000s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.000s, user 0.010s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+./main create_table 10 wc_files large.txt remove_block 0 wc_files large.txt remove_block 0 wc_files large.txt remove_block 0
+        create_table real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.010s, user 0.000s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.000s, user 0.010s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
+            wc_files real 0.000s, user 0.000s, sys 0.000s
+        add_to_block real 0.000s, user 0.000s, sys 0.000s
+        remove_block real 0.000s, user 0.000s, sys 0.000s
