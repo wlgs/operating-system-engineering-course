@@ -13,12 +13,14 @@ shared:
 	$(CC) -shared -fPIC -o libz1.so libz1.o
 	$(CC) main.c -o main -L. --lz1 -Wl,-rpath=`pwd`
 
+dynamic:
+	make clean
+	$(CC) -fPIC -c libz1.c -o libz1.o 
+	$(CC) -Wl,-rpath=. -fPIC -shared -o libz1.so libz1.o 
+	$(CC) -fPIC -L. -o main main_dynamic.c -ldl -D DYNAMIC
+
 clean:
 	rm -f *.o *.a *.so *.exe main
-
-run:
-	make static
-	./main.exe test1.txt test2.txt
 
 benchmark:
 	echo "WC SMALL FILE x5"
