@@ -1,10 +1,17 @@
-123456789
-123456789
-123456789
-123456789
-123456789
-123456789
-123456789
-123456789
-123456789
-123456789
+WC SMALL FILE x5
+time ./main.exe create_table 10 wc_files small.txt small.txt small.txt small.txt small.txt
+real    0m0.084s
+user    0m0.000s
+sys     0m0.015s
+-
+WC MEDIUM FILE x5
+time ./main.exe create_table 10 wc_files medium.txt medium.txt medium.txt medium.txt medium.txt
+real    0m0.091s
+user    0m0.000s
+sys     0m0.015s
+-
+WC LARGE FILE x5
+time ./main.exe create_table 10 wc_files large.txt large.txt large.txt large.txt large.txt
+real    0m0.091s
+user    0m0.000s
+sys     0m0.015s
