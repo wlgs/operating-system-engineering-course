@@ -11,21 +11,18 @@ shared:
 	make clean
 	$(CC) -fPIC -c libz1.c
 	$(CC) -shared -fPIC -o libz1.so libz1.o
-	$(CC) main.c -o main -L. --lz1 -Wl,-rpath=`pwd`
+	$(CC) main.c -o main -L. -lz1 -Wl,-rpath=`pwd`
+	rm -f *.o
 
 dynamic:
-	make clean
-	$(CC) -fPIC -c libz1.c -o libz1.o 
-	$(CC) -Wl,-rpath=. -fPIC -shared -o libz1.so libz1.o 
-	$(CC) -fPIC -L. -o main main_dynamic.c -ldl -D DYNAMIC
+	make shared
+	$(CC) -fPIC -L. -o main main.c -ldl -D DYNAMIC
+	rm -f *.o
 
 clean:
 	rm -f *.o *.a *.so *.exe main
 
-benchmark:
-	echo "WC SMALL FILE x5"
-	time ./main.exe create_table 10 wc_files small.txt small.txt small.txt small.txt small.txt
-	echo "WC MEDIUM FILE x5"
-	time ./main.exe create_table 10 wc_files medium.txt medium.txt medium.txt medium.txt medium.txt
-	echo "WC LARGE FILE x5"
-	time ./main.exe create_table 10 wc_files large.txt large.txt large.txt large.txt large.txt
+runtests:
+	./main create_table 1000000 wc_files small.txt medium.txt large.txt remove_block 0 wc_files large.txt large.txt large.txt large.txt
+	./main create_table 99999999 wc_files large.txt wc_files large.txt wc_files large.txt remove_block 1 remove_block 0 wc_files large.txt
+	./main create_table 10 wc_files large.txt remove_block 0 wc_files large.txt remove_block 0 wc_files large.txt remove_block 0

@@ -1,8 +1,25 @@
 #include <stdio.h>
-#include "libz1.h"
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/times.h>
+
+#ifdef DYNAMIC
+	#include <dlfcn.h>
+    #include <string.h>
+    struct BlockArray
+{
+    int maxIndex;
+    struct Block *Block;
+};
+
+struct Block
+{
+    int empty;
+    char *data; // result of wc command
+};
+#else
+	#include "libz1.h"
+#endif
 
 clock_t clock_t_begin, clock_t_end;
 struct tms times_start_buffer, times_end_buffer;
@@ -30,6 +47,24 @@ void print_times(const char* operation){
 
 int main(int argc, char **argv)
 {
+    #ifdef DYNAMIC
+    void *handle = dlopen("libz1.so", RTLD_LAZY);
+    if (handle == NULL){
+        printf("Error loading the library.");
+        return -1;
+    }
+    struct BlockArray (*createBlockArray)(int) = (struct BlockArray (*)(int)) dlsym(handle,"createBlockArray");
+    char* (*wc_file)(char*) = (char* (*)(char*)) dlsym(handle,"wc_file");
+    int (*saveFileToBlockArray)(char*, struct BlockArray) = (int (*)(char*, struct BlockArray)) dlsym(handle,"saveFileToBlockArray");
+    void (*removeBlock)(struct BlockArray, int) = (void (*)(struct BlockArray, int)) dlsym(handle,"removeBlock");
+
+
+    if (dlerror()) {
+        printf("Error loading the functions.");
+        return -1;
+    }
+    #endif
+
     // slice the args
     argv++;
     argc--;
@@ -103,5 +138,8 @@ int main(int argc, char **argv)
             return -1;
         }
     }
+    #ifdef DYNAMIC
+	dlclose(handle);
+	#endif
     return 0;
 }
