@@ -81,7 +81,7 @@ int saveFileToBlockArray(char *filename, struct BlockArray blockArray)
     newBlock.empty = 0;
     strcpy(newBlock.data, data);
     free(data);
-    char* command = (char *) calloc(128, sizeof(char));
+    char *command = (char *)calloc(128, sizeof(char));
     strcpy(command, "rm -f ");
     strcat(command, filename);
     system(command);
