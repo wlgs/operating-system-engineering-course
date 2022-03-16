@@ -7,6 +7,34 @@ static:
 	$(CC) main.c -o main -L. -lz1
 	rm -f *.o *.a
 
+staticOPT1:
+	make clean
+	$(CC) -c libz1.c
+	ar crs libz1.a libz1.o
+	$(CC) main.c -o main -L. -lz1 -O1
+	rm -f *.o *.a
+
+staticOPT2:
+	make clean
+	$(CC) -c libz1.c
+	ar crs libz1.a libz1.o
+	$(CC) main.c -o main -L. -lz1 -O2
+	rm -f *.o *.a
+
+staticOPT3:
+	make clean
+	$(CC) -c libz1.c
+	ar crs libz1.a libz1.o
+	$(CC) main.c -o main -L. -lz1 -O3
+	rm -f *.o *.a
+
+staticOPTs:
+	make clean
+	$(CC) -c libz1.c
+	ar crs libz1.a libz1.o
+	$(CC) main.c -o main -L. -lz1 -Os
+	rm -f *.o *.a
+
 shared:
 	make clean
 	$(CC) -fPIC -c libz1.c
@@ -46,3 +74,30 @@ runtests-all:
 	rm -f *.so
 	#TEST ENDED SEE RESULT IN report.txt
 
+runtest-all-opts:
+	make static
+	echo "======= Optimization 0 =======" >> report.txt
+	make runtest
+	make clean
+
+	make staticOPT1
+	echo "======= Optimization 1 =======" >> report.txt
+	make runtest
+	make clean
+
+	make staticOPT2
+	echo "======= Optimization 2 =======" >> report.txt
+	make runtest
+	make clean
+
+	make staticOPT3
+	echo "======= Optimization 3 =======" >> report.txt
+	make runtest
+	make clean
+
+	make staticOPTs
+	echo "======= Optimization s =======" >> report.txt
+	make runtest
+	make clean
+
+	#OPTIMIZATION TESTS ENDED.

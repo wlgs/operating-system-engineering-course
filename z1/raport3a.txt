@@ -1,3 +1,5 @@
+Komentarz:
+
 ======= S T A T I C =======
 ./main create_table 1000000 wc_files small.txt medium.txt large.txt remove_block 0 wc_files large.txt large.txt large.txt large.txt
         create_table real 0.000s, user 0.000s, sys 0.000s
