@@ -18,6 +18,8 @@ float diffSystemTime(struct rusage *start, struct rusage *end)
 
 int main(int argc, char **argv)
 {
+    struct rusage mainStart, mainEnd;
+    getrusage(RUSAGE_SELF, &mainStart);
     // slice the args
     argv++;
     argc--;
@@ -71,5 +73,11 @@ int main(int argc, char **argv)
             return -1;
         }
     }
+
+    getrusage(RUSAGE_SELF, &mainEnd);
+    printf("User time: %.06f\n", diffUserTime(&mainStart, &mainEnd));
+    printf("System time: %.06f\n", diffSystemTime(&mainStart, &mainEnd));
+
+
     return 0;
 }
