@@ -40,6 +40,7 @@ char *wc_file(char *wcArgs)
     strcat(command, " > ");
     strcat(command, output);
     system(command);
+    free(command);
     return output;
 }
 
@@ -72,7 +73,6 @@ int saveFileToBlockArray(char *filename, struct BlockArray blockArray)
         }
     }
     fclose(file);
-    free(file);
     data[--i] = '\0';
     // printf("%s\n",data);
     struct Block newBlock;
