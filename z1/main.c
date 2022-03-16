@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "libz1.h"
 #include <stdio.h>
+#include <unistd.h>
 #include <sys/times.h>
 
 double timeDifference(clock_t t1, clock_t t2){
