@@ -3,22 +3,34 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/resource.h>
+#include <sys/time.h>
+
 
 float diffUserTime(struct rusage *start, struct rusage *end)
 {
     return (end->ru_utime.tv_sec - start->ru_utime.tv_sec) +
-           1e-6*(end->ru_utime.tv_usec - start->ru_utime.tv_usec);
+           1e-6*(end->ru_utime.tv_usec - start->ru_utime.tv_usec) * 1000.0;
 }
 
 float diffSystemTime(struct rusage *start, struct rusage *end)
 {
     return (end->ru_stime.tv_sec - start->ru_stime.tv_sec) +
-           1e-6*(end->ru_stime.tv_usec - start->ru_stime.tv_usec);
+           1e-6*(end->ru_stime.tv_usec - start->ru_stime.tv_usec) * 1000.0;
+}
+
+float diffRealTime(struct timeval *start, struct timeval *end){
+    float elapsedTime;
+    elapsedTime = (end->tv_sec - start->tv_sec)*1000.0;      // sec to ms
+    elapsedTime += (end->tv_usec - start->tv_usec) / 1000.0;
+    return elapsedTime;
 }
 
 int main(int argc, char **argv)
 {
     struct rusage mainStart, mainEnd;
+    struct timeval mainRealStart, mainRealEnd;
+    gettimeofday(&mainRealStart, NULL);
+
     getrusage(RUSAGE_SELF, &mainStart);
     // slice the args
     argv++;
@@ -75,9 +87,10 @@ int main(int argc, char **argv)
     }
 
     getrusage(RUSAGE_SELF, &mainEnd);
-    printf("User time: %.06f\n", diffUserTime(&mainStart, &mainEnd));
-    printf("System time: %.06f\n", diffSystemTime(&mainStart, &mainEnd));
-
+    gettimeofday(&mainRealEnd, NULL);
+    printf("User time: %.08f\n", diffUserTime(&mainStart, &mainEnd));
+    printf("System time: %.08f\n", diffSystemTime(&mainStart, &mainEnd));
+    printf("Real time: %.08f\n", diffRealTime(&mainRealStart, &mainRealEnd));
 
     return 0;
 }
