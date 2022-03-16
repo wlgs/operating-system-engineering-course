@@ -2,40 +2,42 @@
 #include "libz1.h"
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/resource.h>
-#include <sys/time.h>
+#include <sys/times.h>
 
+clock_t clock_t_begin, clock_t_end;
+struct tms times_start_buffer, times_end_buffer;
+FILE *timerFile;
 
-float diffUserTime(struct rusage *start, struct rusage *end)
-{
-    return (end->ru_utime.tv_sec - start->ru_utime.tv_sec) +
-           1e-6*(end->ru_utime.tv_usec - start->ru_utime.tv_usec) * 1000.0;
+void start_timer(){
+	clock_t_begin = times(&times_start_buffer);
 }
 
-float diffSystemTime(struct rusage *start, struct rusage *end)
-{
-    return (end->ru_stime.tv_sec - start->ru_stime.tv_sec) +
-           1e-6*(end->ru_stime.tv_usec - start->ru_stime.tv_usec) * 1000.0;
+void stop_timer(){
+	clock_t_end = times(&times_end_buffer);
 }
 
-float diffRealTime(struct timeval *start, struct timeval *end){
-    float elapsedTime;
-    elapsedTime = (end->tv_sec - start->tv_sec)*1000.0;      // sec to ms
-    elapsedTime += (end->tv_usec - start->tv_usec) / 1000.0;
-    return elapsedTime;
+double calc_time(clock_t s, clock_t e) {
+    return ((long int) (e - s) / (double) sysconf(_SC_CLK_TCK));
+}
+
+void print_times(const char* operation){
+	fprintf(timerFile,"%20s real %.3fs, user %.3fs, sys %.3fs\n",
+			operation,
+			calc_time(clock_t_begin, clock_t_end),
+			calc_time(times_start_buffer.tms_cutime, times_end_buffer.tms_cutime),
+			calc_time(times_start_buffer.tms_cstime, times_end_buffer.tms_cstime));
 }
 
 int main(int argc, char **argv)
 {
-    struct rusage mainStart, mainEnd;
-    struct timeval mainRealStart, mainRealEnd;
-    gettimeofday(&mainRealStart, NULL);
-
-    getrusage(RUSAGE_SELF, &mainStart);
     // slice the args
     argv++;
     argc--;
-
+    timerFile = fopen("report.txt", "a");
+    if(timerFile == NULL){
+        printf("Could not open report.txt in write mode");
+        return -1;
+    }
     int idx = 0;
     struct BlockArray mainArray;
     // main switch
@@ -46,14 +48,22 @@ int main(int argc, char **argv)
         {
             idx++;
             printf("Creating table of %d\n", atoi(argv[idx]));
+
+            start_timer();
             mainArray = createBlockArray(atoi(argv[idx]));
+            stop_timer();
+            print_times("create_table");
+
             idx++;
         }
         else if (strcmp(argv[idx], "remove_block") == 0)
         {
             idx++;
             printf("Removing block %d\n", atoi(argv[idx]));
+            start_timer();
             removeBlock(mainArray, atoi(argv[idx]));
+            stop_timer();
+            print_times("remove_block");
             idx++;
         }
         else if (strcmp(argv[idx], "wc_files") == 0)
@@ -74,8 +84,16 @@ int main(int argc, char **argv)
                 strcat(wcArgs, argv[idx]);
             }
             printf("Executing wc %s\n", wcArgs);
+
+            start_timer();
             char *outputFileName = wc_file(wcArgs);
+            stop_timer();
+            print_times("wc_files");
+
+            start_timer();
             int indexAdded = saveFileToBlockArray(outputFileName, mainArray);
+            stop_timer();
+            print_times("add_to_block");
             printf("Saved to block at %d\n", indexAdded);
             free(wcArgs);
         }
@@ -85,12 +103,5 @@ int main(int argc, char **argv)
             return -1;
         }
     }
-
-    getrusage(RUSAGE_SELF, &mainEnd);
-    gettimeofday(&mainRealEnd, NULL);
-    printf("User time: %.08f\n", diffUserTime(&mainStart, &mainEnd));
-    printf("System time: %.08f\n", diffSystemTime(&mainStart, &mainEnd));
-    printf("Real time: %.08f\n", diffRealTime(&mainRealStart, &mainRealEnd));
-
     return 0;
 }
