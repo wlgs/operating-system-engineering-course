@@ -2,6 +2,7 @@
 #include "libz1.h"
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/time.h>
 
 double timeDifference(clock_t t1, clock_t t2){
     return ((double)(t2 - t1) / sysconf(_SC_CLK_TCK));
