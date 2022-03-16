@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include "libz1.h"
-#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
-#include <sys/time.h>
+#include <time.h>
 
 double timeDifference(clock_t t1, clock_t t2){
     return ((double)(t2 - t1) / sysconf(_SC_CLK_TCK));
