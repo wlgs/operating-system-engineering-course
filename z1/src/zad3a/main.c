@@ -73,7 +73,7 @@ int main(int argc, char **argv)
     // slice the args
     argv++;
     argc--;
-    timerFile = fopen("report.txt", "a");
+    timerFile = fopen("raport_generated.txt", "a");
     if (timerFile == NULL)
     {
         printf("Could not open report.txt in write mode");
