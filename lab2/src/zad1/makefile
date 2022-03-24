@@ -1,10 +1,14 @@
 CC= gcc -Wall
 
-all: main.c
+sys: mainsys.c
 	# Compiling main.c ...
-	$(CC) main.c -o main
+	$(CC) mainsys.c -o mainsys
 
+lib: mainlib.c
+	# Compiling main.c ...
+	$(CC) mainlib.c -o mainlib
 
 clean:
 	# Cleaning executable ...
-	rm -f main
+	rm -f mainlib
+	rm -f mainsys
