@@ -5,3 +5,5 @@
 *.a
 *.exe
 *.so
+*CMakeLists.txt
+*/cmake-build-debug
