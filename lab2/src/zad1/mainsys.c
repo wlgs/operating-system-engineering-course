@@ -41,7 +41,8 @@ int main(int argc, char **argv) {
         strcpy(name2, argv[2]);
     }
 
-    char c;
+//    char c;
+    char *c = (char *) calloc(1, sizeof(char));
 
     int we = open(name1, O_RDONLY);
     int wy = open(name2, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
@@ -49,17 +50,19 @@ int main(int argc, char **argv) {
 
     int cnt = 1;
 
-    while (read(we, &c, 1) == 1) {
-        printf("--line %d\n", cnt);
+    while (read(we, c, 1) == 1) {
+//        printf("--line %d\n", cnt);
         cnt++;
-        line = appendCharToCharArray(line, c);
-        while (c != '\n') {
-            read(we, &c, 1);
-            line = appendCharToCharArray(line, c);
+//        line = appendCharToCharArray(line, c);
+        line = strcat(line, c);
+        while (c[0] != '\n') {
+            read(we, c, 1);
+//            line = appendCharToCharArray(line, c);
+            line = strcat(line, c);
         }
-        printf("%s", line);
+//        printf("%s", line);
         if (checkLine(line) == 0) {
-            printf("VALID LINE\n");
+//            printf("VALID LINE\n");
             size_t i = 0;
             for (; i < strlen(line); i++) {
                 write(wy, &line[i], 1);

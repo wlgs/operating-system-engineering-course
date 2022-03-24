@@ -1,10 +1,6 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <string.h>
-#include <unistd.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-
 
 int checkLine(char *line) {
     size_t i = 0;
@@ -41,7 +37,7 @@ int main(int argc, char **argv) {
         strcpy(name2, argv[2]);
     }
 
-    char* c = (char*) calloc(1, sizeof(char));
+    char *c = (char *) calloc(1, sizeof(char));
 
     FILE *we = fopen(name1, "r");
     FILE *wy = fopen(name2, "w");
@@ -50,7 +46,7 @@ int main(int argc, char **argv) {
     int cnt = 1;
 
     while (fread(c, sizeof(char), 1, we) == 1) {
-        printf("--line %d\n", cnt);
+//        printf("--line %d\n", cnt);
         cnt++;
 //        line = appendCharToCharArray(line, c);
         line = strcat(line, c);
@@ -58,9 +54,9 @@ int main(int argc, char **argv) {
             fread(c, sizeof(char), 1, we);
             line = strcat(line, c);
         }
-        printf("%s", line);
+//        printf("%s", line);
         if (checkLine(line) == 0) {
-            printf("VALID LINE\n");
+//            printf("VALID LINE\n");
             fwrite(line, sizeof(char), strlen(line), wy);
         }
         memset(line, 0, strlen(line));

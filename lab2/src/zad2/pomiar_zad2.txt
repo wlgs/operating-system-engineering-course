@@ -1,0 +1,37 @@
+Czasy zostały zmierzone poleceniem time
+Plik test.txt ma około 100 000 linii.
+Plik test2.txt ma około 20 000 linii.
+W algorytmie sys jak i lib nie ma różnicy w złożoności.
+
+SYS 20k lines:
+time ./mainsys 4 test2.txt
+Znak - 4 - występuje 13440 razy w pliku, w 6720 liniach.
+
+real    0m16.518s
+user    0m0.338s
+sys     0m2.199s
+
+LIB 20k lines:
+time ./mainlib 4 test2.txt
+Znak - 4 - występuje 13440 razy w pliku, w 6720 liniach.
+
+real    0m0.012s
+user    0m0.004s
+sys     0m0.000s
+
+SYS 100k lines:
+time ./mainsys 4 test.txt
+Znak - 4 - występuje 67200 razy w pliku, w 33600 liniach.
+
+real    1m24.423s
+user    0m0.913s
+sys     0m13.480s
+
+LIB 100k lines:
+time ./mainlib 4 test.txt
+Znak - 4 - występuje 67200 razy w pliku, w 33600 liniach.
+
+real    0m0.036s
+user    0m0.014s
+sys     0m0.000s
+

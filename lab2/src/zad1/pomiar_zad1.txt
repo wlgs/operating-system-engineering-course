@@ -1,0 +1,29 @@
+Czasy zostały zmierzone poleceniem time
+Plik test.txt ma około 90 000 linii.
+Plik test2.txt ma około 10 000 linii.
+W algorytmie sys jak i lib nie ma różnicy w złożoności.
+
+SYS 10k lines:
+time ./mainsys test2.txt res.txt
+real    0m4.380s
+user    0m0.000s
+sys     0m0.793s
+
+LIB 10k lines:
+time ./mainlib test2.txt res.txt
+real    0m0.011s
+user    0m0.003s
+sys     0m0.000s
+
+SYS 90k lines:
+time ./mainsys test.txt res1.txt
+real    0m38.689s
+user    0m0.827s
+sys     0m5.510s
+
+LIB 90k lines:
+time ./mainlib test.txt res1.txt
+real    0m0.022s
+user    0m0.009s
+sys     0m0.000s
+

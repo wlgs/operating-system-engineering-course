@@ -1,6 +1,5 @@
 CC= gcc -Wall
 
-
 all:
 	make sys
 	make lib
