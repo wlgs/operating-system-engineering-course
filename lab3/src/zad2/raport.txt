@@ -1,0 +1,11 @@
+Rectanglewidth: 0.010000000000, Processes: 100 - real 0.430s, user 0.000s, sys 0.000s
+Rectanglewidth: 0.000100000000, Processes: 10000 - real 41.520s, user 0.000s, sys 0.000s
+Rectanglewidth: 0.001000000000, Processes: 1000 - real 3.540s, user 0.000s, sys 0.000s
+Rectanglewidth: 0.010000000000, Processes: 300 - real 0.790s, user 0.000s, sys 0.000s
+Rectanglewidth: 0.001000000000, Processes: 300 - real 1.000s, user 0.000s, sys 0.000s
+Rectanglewidth: 0.000100000000, Processes: 300 - real 0.920s, user 0.000s, sys 0.000s
+Rectanglewidth: 0.000001000000, Processes: 50 - real 0.240s, user 0.000s, sys 0.000s
+Rectanglewidth: 0.000000010000, Processes: 50 - real 0.290s, user 0.040s, sys 0.000s
+Rectanglewidth: 0.000000000010, Processes: 50 - real 143.170s, user 47.520s, sys 0.010s
+Rectanglewidth: 0.000000001000, Processes: 100 - real 1.760s, user 0.230s, sys 0.000s
+Rectanglewidth: 0.000000000100, Processes: 100 - real 14.830s, user 2.400s, sys 0.000s

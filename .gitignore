@@ -6,4 +6,4 @@ notepad.txt
 *.exe
 *.so
 *CMakeLists.txt
-*/cmake-build-debug
+cmake-build-debug/
