@@ -1,0 +1,5 @@
+-= Obserwacje =-
+ignorowane sygnał nie lądują do listy oczekiwanych
+po wykonani exec, sygnał 'pending' jest 'ignored'
+sygnały ignorowane są również ignorowane po wykonaniu exec
+sygnał zablokowany jest widoczny jako oczekujący po wykonaniu exec

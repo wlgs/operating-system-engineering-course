@@ -1,0 +1,2 @@
+składnik1 = tutaj_komenda1
+składnik2 = tutaj_komenda2
