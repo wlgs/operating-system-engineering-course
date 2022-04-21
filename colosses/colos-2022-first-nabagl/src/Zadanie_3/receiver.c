@@ -19,5 +19,6 @@ int main() {
     ************************************/
     close(fd);
     printf("%d square is: %d\n", val, val*val);
+    system("rm "PIPE);
     return 0;
 }
