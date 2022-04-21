@@ -7,3 +7,4 @@ notepad.txt
 *.so
 *CMakeLists.txt
 cmake-build-debug/
+main
