@@ -1,2 +1,5 @@
-składnik1 = tutaj_komenda1
-składnik2 = tutaj_komenda2
+commands0 = cat /etc/passwd | echo hello
+commands1 = ls | grep '^a' | echo world
+commands2 = grep 11 | ps | grep 'com'
+commands0 | commands1
+commands2

@@ -1,10 +1,16 @@
-CC = gcc -Wall
+CC = gcc
+CFLAGS = -Wall
 
-
-all: main.c
-	$(CC) main.c -o main
+all:
+	$(CC) $(CFLAGS) producer.c -o producer
+	$(CC) $(CFLAGS) consumer.c -o consumer
+	$(CC) $(CFLAGS) main.c -o main
 
 clean:
+	rm -f consumer
+	rm -f producer
 	rm -f main
 	rm -f *.o
-	rm -f *.exe
+
+test: clean all
+	./main
