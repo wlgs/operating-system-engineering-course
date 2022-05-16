@@ -1,10 +1,13 @@
-CC = gcc -Wall
+CC = gcc
+CFLAGS = -Wall
 
+all: client server
 
-all: main.c
-	$(CC) main.c -o main
+client: client.c
+	$(CC) $(CFLAGS) -o client client.c
+
+server: server.c
+	$(CC) $(CLFAGS) -o server server.c
 
 clean:
-	rm -f main
-	rm -f *.o
-	rm -f *.exe
+	rm -f client server
